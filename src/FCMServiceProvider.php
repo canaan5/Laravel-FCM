@@ -12,20 +12,20 @@ class FCMServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        if (str_contains($this->app->version(), 'Lumen')) {
-            $this->app->configure('fcm');
-        } else {
+//         if (str_contains($this->app->version(), 'Lumen')) {
+//             $this->app->configure('fcm');
+//         } else {
             $this->publishes([
                 __DIR__.'/../config/fcm.php' => config_path('fcm.php'),
             ]);
-        }
+//         }
     }
 
     public function register()
     {
-		if (!str_contains($this->app->version(), 'Lumen')) {
-            $this->mergeConfigFrom(__DIR__.'/../config/fcm.php', 'fcm');
-        }
+// 		if (!str_contains($this->app->version(), 'Lumen')) {
+//             $this->mergeConfigFrom(__DIR__.'/../config/fcm.php', 'fcm');
+//         }
 
         $this->app->singleton('fcm.client', function ($app) {
             return (new FCMManager($app))->driver();
